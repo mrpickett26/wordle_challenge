@@ -22,8 +22,9 @@ solution_list<-load_dictionary(google_ns)
 
 
 # Step 2 matching the list 
-
-
+library(dplyr)
+similarity_csv<- intersect(collins_scrab,google_ns)
+print(similarity_csv)
 ```
 
 ## R Markdown
