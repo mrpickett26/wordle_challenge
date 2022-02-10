@@ -23,6 +23,8 @@ solution_list<-load_dictionary(google_ns)
 
 # Step 2 matching the list 
 
+#sample function
+sample(x, size, replace = FALSE, prob = NULL)
 
 ```
 
