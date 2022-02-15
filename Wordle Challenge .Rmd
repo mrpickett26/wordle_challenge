@@ -25,6 +25,12 @@ solution_list<-load_dictionary(google_ns)
 library(dplyr)
 similarity_csv<- intersect(collins_scrab,google_ns)
 print(similarity_csv)
+
+# Step 3 removing anything that is not 5 letters 
+pick_solution<- function(x,variable) {
+  if nchar(variable) == 5, print(variable)
+  else variable=0
+}
 ```
 
 ## R Markdown
