@@ -57,6 +57,8 @@ solution<- pick_solution2(solution_list2)
 
 
 
+#sample function
+sample(x, size, replace = FALSE, prob = NULL)
 
 ```
 
