@@ -6,31 +6,58 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+# setting up the wordle game to create a function that reads in the CSV 
+
 library(tidyverse)
-df1<-"https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/collins-scrabble-words-2019.txt"
-collins_scrab<- read_csv(df1, col_names=TRUE)
-df2<- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/google-10000-english-usa-no-swears.txt"
-google_ns<- read_csv(df2, col_names=TRUE)
+load_dictionary<- function(x){read.csv(x)}
+valid_list<- load_dictionary("~/Documents/collins-scrabble-words-2019.csv")
+solution_list<-load_dictionary("~/Documents/google-10000-english-usa-no-swears.csv")
+
+#df1<-"https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/collins-scrabble-words-2019.txt"
+#collins_scrab<- read_csv(df1, col_names=TRUE)
+#df2<- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/google-10000-english-usa-no-swears.txt"
+#google_ns<- read_csv(df2, col_names=TRUE)
 
 # Step 1 programming the load_dictionary function 
 library(sjmisc)
-load_dictionary<- function(x, variable){
-  return(x)
-}
-valid_list<-load_dictionary(collins_scrab)
-solution_list<-load_dictionary(google_ns)
-
+#load_dictionary<- function(x, variable){
+ # return(x) 
+  #}
+ #valid_list<-load_dictionary(collins_scrab)
+  #solution_list<-load_dictionary(google_ns)
 
 # Step 2 matching the list 
 library(dplyr)
-similarity_csv<- intersect(collins_scrab,google_ns)
+similarity_csv <-intersect(valid_list, solution_list)
 print(similarity_csv)
+# in similarity csv I see 8336 observations or same words
 
-# Step 3 removing anything that is not 5 letters 
-pick_solution<- function(x,variable) {
-  if nchar(variable) == 5, print(variable)
-  else variable=0
+ # Step 3 removing anything that is not 5 letters 
+library(stringr)
+library(qdapRegex)
+library(stringi)
+solution_list2<-as.character(solution_list)
+pick_solution2<- function(x){
+  z<-str_split(x, " ")[[1]] 
+  y<-stri_length(z)
+  my.data<-cbind(z,y)
+  my.data2<- as.data.frame(my.data)
+  my.data2%>% 
+  filter(y=="5")
+  print(x)
 }
+#pick_solution<-function(x){rm_nchar_words(str, "1,5")}
+#z<-function(x) {unlist(strsplit(x, split=" ")) paste(x[nchar(x)===5], collapse=" ")}
+
+solution<- pick_solution2(solution_list2)
+
+
+
+
+
+
+
+
 ```
 
 ## R Markdown
@@ -40,7 +67,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
-summary(cars)
+
 ```
 
 ## Including Plots
