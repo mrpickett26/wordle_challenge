@@ -36,20 +36,39 @@ print(similarity_csv)
 library(stringr)
 library(qdapRegex)
 library(stringi)
-solution_list2<-as.character(solution_list)
+solution_list2<-solution_list$words
 pick_solution2<- function(x){
-  z<-str_split(x, " ")[[1]] 
-  y<-stri_length(z)
-  my.data<-cbind(z,y)
+  y<-stri_length(x)
+  my.data<-cbind(x,y)
   my.data2<- as.data.frame(my.data)
-  my.data2%>% 
-  filter(y=="5")
-  print(x)
+  my.data2 %>% 
+  filter (y==5)->filter_mydata
+  chosen <- sample(unique(filter_mydata$x), 1)
+  chosen_word <-str_split(chosen, "")
+  print(chosen_word)
 }
+
+solution<- pick_solution2(solution_list2)
+
+#Part 4 
+play_wordle<-function(solution, valid_list, num_guesses=6){
+  print("you have 6 chances to guess the correct word. The word is five letters in length and could contain any letters of the alphabet")
+  let<- print(LETTERS)
+ guess <- readline(prompt="Enter guess here: ")
+ 
+
+  
+
+}
+
 #pick_solution<-function(x){rm_nchar_words(str, "1,5")}
 #z<-function(x) {unlist(strsplit(x, split=" ")) paste(x[nchar(x)===5], collapse=" ")}
 
-solution<- pick_solution2(solution_list2)
+
+#chosen <- sample(unique(solution$x), 1)
+
+#random function for choosing
+#random_solution<- df[(nrow(df), 1), ]
 
 
 
