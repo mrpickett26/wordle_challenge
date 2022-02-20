@@ -55,27 +55,38 @@ solution<- pick_solution2(solution_list2)
 play_wordle<-function(solution, valid_list, num_guesses=6){
   print("you have 6 chances to guess the correct word. The word is five letters in length and could contain any letters of the alphabet")
   let<- print(LETTERS)
-  guess <- readline(prompt="Enter guess here: ")
-  sol_mat = array(unlist(solution))
-  i = 1
+  #guess <- readline(prompt="Enter guess here: ")
+  sol_mat <- unlist(solution)
+  i <- 1
 for (i in 1:num_guesses){
-  print("1Test")
-  print(i)
-  for (i in l:length(sol_mat)){
-    print("2Test")
-    if (guess==sol_mat[i]){
-      pos = i
-      print(pos)}
-      else{ 
-        print("wrong")
-      }
+  guess <- readline(prompt= paste0("Enter guess ", toupper(i) , " here:"))
+  print(guess)
+  vect_guess <-str_split(guess, "")
+  correct_answer <-intersect(vect_guess, solution)
+ 
+Official_guess<- (vect_guess[i]%in% solution) 
+#idx<- which(vect_guess %in% LETTERS )  
+#vect_guess<-vect_guess[-idx]
+
+if (Official_guess==TRUE){ 
+for (i in 1:length(vect_guess))
+  for (j in 1:length(sol_mat)){
+    if (vect_guess[i]==sol_mat[j]){
+      i<-print("*")}
+    if (vect_guess[i]!=sol_mat[j]){
+      i<-print("+")
     }
-}
-}
+       }}
+if (Official_guess==FALSE){
+  i<-print("-")
+}    
+}}
 
 play_wordle(solution, valid_list,num_guesses)
+
 #pick_solution<-function(x){rm_nchar_words(str, "1,5")}
 #z<-function(x) {unlist(strsplit(x, split=" ")) paste(x[nchar(x)===5], collapse=" ")}
+#(vect_guess[i]==solution[i]){
 
 
 #chosen <- sample(unique(solution$x), 1)
