@@ -56,11 +56,14 @@ play_wordle<-function(solution, valid_list, num_guesses=6){
   print("you have 6 chances to guess the correct word. The word is five letters in length and could contain any letters of the alphabet")
   let<- print(LETTERS)
   guess <- readline(prompt="Enter guess here: ")
-  Sol_mat = array(unlist(solution))
+  sol_mat = array(unlist(solution))
   i = 1
 for (i in 1:num_guesses){
-  for (i in l:length(Sol_mat)){
-    if (guess==sol_mat(i)){
+  print("1Test")
+  print(i)
+  for (i in l:length(sol_mat)){
+    print("2Test")
+    if (guess==sol_mat[i]){
       pos = i
       print(pos)}
       else{ 
